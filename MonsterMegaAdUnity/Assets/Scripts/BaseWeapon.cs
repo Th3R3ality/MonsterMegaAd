@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class BaseWeapon : MonoBehaviour
 {
-    abstract public void Attack(Vector2 attackDestination);
-    abstract public void AltAttack(Vector2 attackDestination);
+    abstract public void Attack();
+    virtual public void AltAttack()
+    {
 
+    }
 }

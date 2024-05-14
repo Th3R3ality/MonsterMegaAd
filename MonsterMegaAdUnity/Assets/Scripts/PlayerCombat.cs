@@ -12,12 +12,12 @@ public class PlayerCombat : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                m_currentWeapon.Attack(Input.mousePosition);
+                m_currentWeapon.Attack();
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                m_currentWeapon.AltAttack(Input.mousePosition);
+                m_currentWeapon.AltAttack();
             }
         }
     }
