@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3458760703484890648}
   m_Layer: 0
-  m_Name: Projectile Spawn
+  m_Name: fireport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,6 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abae1b40aa1d6c43bcb033cc3ad81f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_projectilePrefab: {fileID: 2921284372938177677, guid: ee2acc871af42cd4abd00d9a8294afd5, type: 3}
-  m_muzzleObject: {fileID: 1713234571373062314}
+  m_shotPrefab: {fileID: 2921284372938177677, guid: 8ea4e8a6a6901fb4ea25ccc0c4dca9e3, type: 3}
+  m_fireport: {fileID: 1713234571373062314}
   m_projectileVelocity: 15

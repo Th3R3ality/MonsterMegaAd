@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Rifle : BaseWeapon
 {
-    [SerializeField] GameObject m_projectilePrefab;
-    public GameObject m_muzzleObject;
+    [SerializeField] GameObject m_shotPrefab;
+    public GameObject m_fireport;
     public float m_projectileVelocity = 5.0f;
     Camera m_cameraMain;
     Vector3 m_initialScale;
@@ -15,9 +15,9 @@ public class Rifle : BaseWeapon
     {
         m_initialScale = transform.localScale;
         m_cameraMain = Camera.main;
-        if (m_projectilePrefab == null)
+        if (m_shotPrefab == null)
         {
-            Debug.LogException(new Exception("Rifle projectile prefab not set"));
+            Debug.LogException(new Exception("Rifle shot prefab not set"));
         }
     }
 
@@ -51,7 +51,26 @@ public class Rifle : BaseWeapon
 
     public override void Attack()
     {
-        var projectile = Instantiate(m_projectilePrefab, m_muzzleObject.transform.position, m_muzzleObject.transform.rotation);
-        projectile.GetComponent<Rigidbody2D>().AddForce(projectile.transform.right * m_projectileVelocity * (m_flipped ? -1 : 1), ForceMode2D.Impulse);
+        var shotObject = Instantiate(m_shotPrefab, m_fireport.transform.position, m_fireport.transform.rotation);
+
+        var shot = shotObject.GetComponent<RangedShot>();
+
+        if (shot == null)
+        {
+            Debug.LogException(new Exception("shot object does not contain a <ProjectileShot>"));
+            return;
+        }
+
+        foreach (Projectile projectileObject in shot.m_projectiles)
+        {
+            var rb = projectileObject.rb;
+            if (rb == null)
+            {
+                Debug.LogException(new Exception("projectile object does not contain a <Rigidbody2D>"));
+                return;
+            }
+
+            rb.AddForce(projectileObject.transform.right * m_projectileVelocity * (m_flipped ? -1 : 1), ForceMode2D.Impulse);
+        }
     }
 }
