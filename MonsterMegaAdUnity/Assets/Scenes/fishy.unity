@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 12287073}
   - component: {fileID: 12287074}
   - component: {fileID: 12287076}
+  - component: {fileID: 12287077}
   - component: {fileID: 12287072}
   - component: {fileID: 12287070}
   - component: {fileID: 12287075}
@@ -314,6 +315,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_currentWeapon: {fileID: 1587051583}
+--- !u!114 &12287077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12287069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fde03aeffa4445449c1d21deba9d70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 100
 --- !u!1 &437807503
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,18 +1002,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stateMachine: {fileID: 0}
-  m_damage: 3
+  m_damage: 33
   m_health: 100
   m_speed: 2
   m_rigidbody: {fileID: 1665263863}
   m_animator: {fileID: 1665263861}
   m_collider: {fileID: 1665263862}
-  m_stateChangeDelay: 0
-  m_playerDetectionRadius: 4
-  m_pathDistance: 3
-  m_maxChaseDistance: 2
-  m_attackBoxRange: 0
-  m_attackRange: 0
+  m_stateChangeDelay: 0.14
+  m_playerDetectionRadius: 5.45
+  m_pathDistance: 3.6
+  m_maxChaseDistance: 3
+  m_attackBoxRange: 1.74
+  m_attackRange: 2.16
+  m_currentState: 
   TESTING: 1
 --- !u!212 &1665263865
 SpriteRenderer:
@@ -1062,7 +1077,7 @@ Transform:
   m_GameObject: {fileID: 1665263860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.25, y: 0, z: 0}
+  m_LocalPosition: {x: -5.25, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

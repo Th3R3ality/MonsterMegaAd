@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     [Range(0.0f, 10.0f)] public float m_maxChaseDistance;
     [Range(0.0f, 10.0f)][Tooltip("The Size of the BoxCast in front of the enemy")] public float m_attackBoxRange;
     [Range(0.0f, 10.0f)][Tooltip("The AI will attack if the player is in this range")] public float m_attackRange;
+    [Header("StateMachine Settings")]
+    public string m_currentState;
     public bool TESTING;
 
     private void Awake()
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour
         m_stateMachine.m_maxChaseDistance = m_maxChaseDistance;
         m_stateMachine.testing = TESTING;
         m_stateMachine.m_attackRange= m_attackRange;
+        m_stateMachine.m_attackBoxSize = m_attackBoxRange;
         m_stateMachine.m_attackBoxSize = m_attackBoxRange;
     }
 

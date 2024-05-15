@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEditorInternal;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -17,7 +18,7 @@ public interface IState
 
 public class StateMachine : MonoBehaviour
 {
-    [SerializeField] IState m_currentState;
+    [SerializeField] public IState m_currentState;
     IState m_nextState;
     public GameObject m_owner, m_target;
     public float m_smoothTime;
@@ -82,7 +83,9 @@ public class IdleState : IState
     Rigidbody2D m_rigidbody;
     Vector3 m_initialPosition;
     Vector3 m_targetPosition;
+    GameObject m_target;
     bool movingToInitialPosition;
+
 
     public void Enter(GameObject owner)
     {
@@ -93,6 +96,7 @@ public class IdleState : IState
 
         m_initialPosition = owner.transform.position;
         m_targetPosition = m_initialPosition + new Vector3(owner.GetComponent<Enemy>().m_pathDistance, 0, 0);
+        m_target = owner.GetComponent<StateMachine>().m_target;
         movingToInitialPosition = false;
     }
 
@@ -108,10 +112,10 @@ public class IdleState : IState
         float speed = owner.GetComponent<Enemy>().m_speed;
         float radius = owner.GetComponent<Enemy>().m_playerDetectionRadius;
 
-        Collider2D hitCollider = Physics2D.OverlapBox(owner.transform.position, new Vector2(radius, radius), 0, LayerMask.GetMask("Entity"));
-        if (hitCollider && hitCollider.CompareTag("Player"))
+
+        if (Vector2.Distance(owner.gameObject.transform.position, m_target.transform.position) >= radius)
         {
-            owner.GetComponent<StateMachine>().ChangeState(new ChaseState(hitCollider.gameObject));
+            owner.GetComponent<StateMachine>().ChangeState(new ChaseState(m_target));
             return;
         }
 
@@ -238,6 +242,11 @@ public class AttackState : IState
         {
             hitCollider.GetComponent<Player>().m_health -= damage;
             owner.GetComponent<StateMachine>().ChangeState(new IdleState());
+            Debug.Log("42D ENEMY - Player Hit!");
+        }
+        else
+        {
+            Debug.Log("42D ENEMY - Player Hit!");
         }
         
     }
