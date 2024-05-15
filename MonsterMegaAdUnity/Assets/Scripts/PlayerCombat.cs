@@ -25,7 +25,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (m_currentWeapon != null)
         {
-            Destroy(m_currentWeapon);
+            Destroy(m_currentWeapon.gameObject);
         }
 
         m_currentWeapon = weapon;

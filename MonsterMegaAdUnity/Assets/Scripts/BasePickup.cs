@@ -9,7 +9,6 @@ public abstract class BasePickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("BasePickup OnTriggerEnter2D: " + other.name);
         if (other.transform.tag == m_pickupeeTag)
         {
             DoPickup(other);
