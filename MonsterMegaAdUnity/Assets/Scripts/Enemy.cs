@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     [Range(0.0f, 10.0f)] public float m_playerDetectionRadius;
     [Range(0.0f, 25.0f)] public float m_pathDistance;
     [Range(0.0f, 10.0f)] public float m_maxChaseDistance;
+    [Range(0.0f, 10.0f)][Tooltip("The Size of the BoxCast in front of the enemy")] public float m_attackBoxRange;
+    [Range(0.0f, 10.0f)][Tooltip("The AI will attack if the player is in this range")] public float m_attackRange;
     public bool TESTING;
 
     private void Awake()
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
         m_stateMachine.m_target = null;
         m_stateMachine.m_maxChaseDistance = m_maxChaseDistance;
         m_stateMachine.testing = TESTING;
+        m_stateMachine.m_attackRange= m_attackRange;
+        m_stateMachine.m_attackBoxSize = m_attackBoxRange;
     }
 
     void Start()
@@ -65,6 +69,15 @@ public class Enemy : MonoBehaviour
 
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(this.transform.position, m_maxChaseDistance);
+
+            // Add Gizmos for attack box
+            Gizmos.color = Color.green;
+            Vector3 boxCenter = this.transform.position + transform.right * m_attackBoxRange / 2;
+            Gizmos.DrawWireCube(boxCenter, new Vector3(m_attackBoxRange, m_collider.size.y, 1));
+
+            // Add Gizmos for attack range
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(this.transform.position, m_attackRange);
         }
         else
         {
@@ -80,6 +93,16 @@ public class Enemy : MonoBehaviour
 
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(m_stateMachine.m_owner.transform.position, m_maxChaseDistance);
+
+            // Add Gizmos for attack box
+            Gizmos.color = Color.green;
+            Vector3 boxCenter = m_stateMachine.m_owner.transform.position + m_stateMachine.m_owner.transform.right * m_attackBoxRange / 2;
+            Gizmos.DrawWireCube(boxCenter, new Vector3(m_attackBoxRange, m_collider.size.y, 1));
+
+            // Add Gizmos for attack range
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(m_stateMachine.m_owner.transform.position, m_attackRange);
         }
     }
+
 }
