@@ -15,7 +15,7 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        var weapon = GetComponent<BaseWeapon>();
+        var weapon = weaponObj.GetComponent<BaseWeapon>();
         if (weapon == null)
         {
             Debug.LogException(new System.Exception("Couldn't find type of <BaseWeapon> on instantiated prefab"));
