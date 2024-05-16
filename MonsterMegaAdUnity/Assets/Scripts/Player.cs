@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public int m_health = 100;
+    public int m_health;
     public SpriteRenderer[] srs;
 
 
@@ -15,7 +16,8 @@ public class Player : MonoBehaviour
         if (m_health <= 0)
         {
             print("player dead"); //delete later
-            Application.Quit();
+            SceneManager.LoadScene("level0");
+            
         }
 
         UpdateSpriteVisibility();
