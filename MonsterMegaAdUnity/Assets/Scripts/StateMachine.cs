@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
-using UnityEditorInternal;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-
 
 public interface IState
 {
