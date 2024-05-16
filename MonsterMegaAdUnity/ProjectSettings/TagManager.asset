@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Enemy
+  - Killfloor
   layers:
   - Default
   - TransparentFX

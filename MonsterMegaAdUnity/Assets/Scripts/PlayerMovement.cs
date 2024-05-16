@@ -8,11 +8,16 @@ public class PlayerMovement : MonoBehaviour
     public float m_moveSpeed = 100.0f;
     public float m_jumpForce = 10.0f;
     public bool m_grounded = false;
-    
+    public AudioSource m_audioSource;
     [SerializeField] BoxCollider2D m_collider;
     [SerializeField] BoxCollider2D m_feetCollider;
     Rigidbody2D m_rigidBody;
 
+    private void Awake()
+    {
+        m_audioSource = gameObject.AddComponent<AudioSource>();
+        m_audioSource.clip = (AudioClip)Resources.Load("Audio/jump");
+    }
     void Start()
     {
         if (m_collider == null)
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         if (m_grounded && jump > 0.0f)
         {
             force.y = jump * m_jumpForce;
+            m_audioSource.Play();
         }
 
         m_rigidBody.velocity = force;
