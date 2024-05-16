@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     {
         player = gameObject.AddComponent<AudioSource>();
         ground = (AudioClip)Resources.Load("Audio/ground");
-       enemy = (AudioClip)Resources.Load("Audio/enemy");
+        enemy = (AudioClip)Resources.Load("Audio/enemy");
     }
 
     private void OnDrawGizmosSelected()
