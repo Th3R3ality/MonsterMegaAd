@@ -116,7 +116,6 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject) print("collided");
         if(collision.gameObject.CompareTag("Projectile"))
         {
-            Destroy(collision.gameObject);
             if (m_health - 20 <= 0) Destroy(this.gameObject);
             else
             {
