@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +11,14 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public StateMachine m_stateMachine;
     [HideInInspector] public static Enemy Instance;
     [Header("Enemy Stats")]
-    public float m_damage;
-    public float m_health;
+    public int m_damage;
+    public int m_health;
     public float m_speed;
     [Header("Enemy Components(all comps besides animator are added at runtime")]
     public Rigidbody2D m_rigidbody;
     public Animator m_animator;
     public BoxCollider2D m_collider;
+    public SpriteRenderer[] srs;
     [Header("Enemy Settings")]
     [Range(0.0f, 10.0f)] public float m_stateChangeDelay;
     [Range(0.0f, 10.0f)] public float m_playerDetectionRadius;
@@ -44,6 +46,7 @@ public class Enemy : MonoBehaviour
         m_stateMachine.m_attackRange= m_attackRange;
         m_stateMachine.m_attackBoxSize = m_attackBoxRange;
         m_stateMachine.m_attackBoxSize = m_attackBoxRange;
+        srs = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Start()
@@ -53,7 +56,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        
+        UpdateSpriteVisibility();
     }
 
     private void OnDrawGizmosSelected()
@@ -122,6 +125,25 @@ public class Enemy : MonoBehaviour
             }
             
             
+        }
+    }
+
+    void UpdateSpriteVisibility()
+    {
+
+        int activeSprites = Mathf.FloorToInt(m_health / (100f / 3f));
+
+
+        for (int i = 0; i < srs.Length; i++)
+        {
+            if (i < activeSprites)
+            {
+                srs[i].enabled = true;
+            }
+            else
+            {
+                srs[i].enabled = false;
+            }
         }
     }
 
