@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 2903018}
   m_Layer: 8
   m_Name: Kill Floor (9)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -459,6 +459,7 @@ MonoBehaviour:
   m_moveSpeed: 10
   m_jumpForce: 15
   m_grounded: 0
+  m_audioSource: {fileID: 0}
   m_collider: {fileID: 12287075}
   m_feetCollider: {fileID: 852267821}
 --- !u!61 &12287075
@@ -1147,7 +1148,7 @@ GameObject:
   - component: {fileID: 178445344}
   m_Layer: 8
   m_Name: Kill Floor (4)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1734,7 +1735,7 @@ GameObject:
   - component: {fileID: 284645638}
   m_Layer: 8
   m_Name: Kill Floor (10)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2164,7 +2165,7 @@ GameObject:
   - component: {fileID: 362993883}
   m_Layer: 8
   m_Name: Kill Floor (12)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2490,7 +2491,7 @@ GameObject:
   - component: {fileID: 439258101}
   m_Layer: 8
   m_Name: Kill Floor (6)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2824,7 +2825,7 @@ GameObject:
   - component: {fileID: 473179421}
   m_Layer: 8
   m_Name: Kill Floor (1)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3178,7 +3179,7 @@ GameObject:
   - component: {fileID: 516708338}
   m_Layer: 8
   m_Name: Kill Floor (14)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3569,7 +3570,7 @@ GameObject:
   - component: {fileID: 540376319}
   m_Layer: 8
   m_Name: Kill Floor (15)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9552,7 +9553,7 @@ GameObject:
   - component: {fileID: 808844335}
   m_Layer: 8
   m_Name: Kill Floor (7)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10001,7 +10002,7 @@ GameObject:
   - component: {fileID: 880147747}
   m_Layer: 8
   m_Name: Kill Floor (2)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10596,7 +10597,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 818373f6a0237194f9198b4351d35a6b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12069,7 +12070,7 @@ GameObject:
   - component: {fileID: 1248462725}
   m_Layer: 8
   m_Name: Kill Floor (8)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12685,7 +12686,7 @@ GameObject:
   - component: {fileID: 1386991769}
   m_Layer: 8
   m_Name: Kill Floor (11)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13134,7 +13135,7 @@ GameObject:
   - component: {fileID: 1464863730}
   m_Layer: 8
   m_Name: Kill Floor (3)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14764,7 +14765,7 @@ GameObject:
   - component: {fileID: 2024379178}
   m_Layer: 8
   m_Name: Kill Floor (5)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15041,7 +15042,7 @@ GameObject:
   - component: {fileID: 2044812525}
   m_Layer: 8
   m_Name: Kill Floor (13)
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15487,7 +15488,7 @@ GameObject:
   - component: {fileID: 684236914376246000}
   m_Layer: 8
   m_Name: Kill Floor
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15912,7 +15913,7 @@ GameObject:
   - component: {fileID: 4546540168092874648}
   m_Layer: 8
   m_Name: Kill Floor
-  m_TagString: Untagged
+  m_TagString: Killfloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
