@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 12287070}
   - component: {fileID: 12287075}
   - component: {fileID: 12287077}
+  - component: {fileID: 12287078}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -461,10 +462,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 100
-  srs:
-  - {fileID: 924233440}
-  - {fileID: 1206992852}
-  - {fileID: 2048318838}
+  m_healthIndicator: {fileID: 0}
+  m_spriteRenderer: {fileID: 12287072}
+--- !u!114 &12287078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12287069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff71b85ccfcc1b849bf14ed78211581e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_healthIndicators: []
+  m_healthIndicatorPrefab: {fileID: 0}
+  m_healthIndicatorContainer: {fileID: 0}
+  m_maxIndicatorsPerRow: 10
 --- !u!1 &17961294
 GameObject:
   m_ObjectHideFlags: 0
@@ -14309,7 +14324,7 @@ PrefabInstance:
     - target: {fileID: 3685593090344629476, guid: 4c306e12749b04d4598034f111d57389, type: 3}
       propertyPath: m_animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2111048502}
     - target: {fileID: 7209452083150580455, guid: 4c306e12749b04d4598034f111d57389, type: 3}
       propertyPath: m_LocalPosition.x
       value: 245.43338
@@ -14356,24 +14371,11 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3054978735490342071, guid: 4c306e12749b04d4598034f111d57389, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2111048503}
-    - targetCorrespondingSourceObject: {fileID: 3054978735490342071, guid: 4c306e12749b04d4598034f111d57389, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2111048502}
   m_SourcePrefab: {fileID: 100100000, guid: 4c306e12749b04d4598034f111d57389, type: 3}
 --- !u!4 &2111048498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7209452083150580455, guid: 4c306e12749b04d4598034f111d57389, type: 3}
-  m_PrefabInstance: {fileID: 2111048497}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &2111048499 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4158654048481231490, guid: 4c306e12749b04d4598034f111d57389, type: 3}
-  m_PrefabInstance: {fileID: 2111048497}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &2111048500 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 5602527335859917236, guid: 4c306e12749b04d4598034f111d57389, type: 3}
   m_PrefabInstance: {fileID: 2111048497}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &2111048502
@@ -14398,34 +14400,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2111048503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252941916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bbb4dc3270c39f45a43da631f2ed546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_stateMachine: {fileID: 0}
-  m_damage: 0
-  m_health: 0
-  m_speed: 0.5
-  m_rigidbody: {fileID: 2111048500}
-  m_animator: {fileID: 2111048502}
-  m_collider: {fileID: 2111048499}
-  srs: []
-  m_stateChangeDelay: 1.85
-  m_playerDetectionRadius: 10
-  m_pathDistance: 25
-  m_maxChaseDistance: 10
-  m_attackBoxRange: 6.78
-  m_attackRange: 7.16
-  m_currentState: 
-  TESTING: 0
 --- !u!1 &2143591534
 GameObject:
   m_ObjectHideFlags: 0
