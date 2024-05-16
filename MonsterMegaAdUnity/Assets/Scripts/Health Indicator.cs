@@ -13,16 +13,12 @@ public class HealthIndicator : MonoBehaviour
 
     private void Awake()
     {
-        //if (!m_healthIndicatorContainer)
-        //    Debug.LogException(new Exception("<healthIndicatorContain> not assigned"));
         if (!m_healthIndicatorPrefab)
             Debug.LogException(new Exception("<healthIndicatorPrefab> not assigned"));
     }
 
     public void UpdateIndicators(int health, Color color)
     {
-        if (health < 0) return;
-
         while (m_healthIndicators.Count != health)
         {
             if (m_healthIndicators.Count > health)
@@ -31,7 +27,7 @@ public class HealthIndicator : MonoBehaviour
                 m_healthIndicators.Remove(indicator);
                 Destroy(indicator.gameObject);
             }
-            else
+            else if (m_healthIndicators.Count < health)
             { // add an indicator
 
                 Transform parent = m_healthIndicatorContainer != null ? m_healthIndicatorContainer : this.transform;
@@ -46,7 +42,7 @@ public class HealthIndicator : MonoBehaviour
                 m_healthIndicators.Add(spriteRenderer);
             }
 
-            if (m_healthIndicators.Count < 0) return;
+            if (m_healthIndicators.Count <= 0) return;
 
             // align indicators (Evil dark shadow magic mathematics)
             float rowCount = m_maxIndicatorsPerRow * Mathf.Floor(m_healthIndicators.Count / m_maxIndicatorsPerRow);
