@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D m_rigidbody;
     public Animator m_animator;
     public BoxCollider2D m_collider;
-    public AudioSource m_audioSource;
     public SpriteRenderer m_spriteRenderer;
     public HealthIndicator m_healthIndicator;
 
@@ -50,8 +49,6 @@ public class Enemy : MonoBehaviour
             Debug.LogException(new Exception("<animator> not assigned"));
         if (!m_collider)
             Debug.LogException(new Exception("<collider> not assigned"));
-        if (!m_audioSource)
-            Debug.LogException(new Exception("<audioSource> not assigned"));
         if (!m_spriteRenderer)
             Debug.LogException(new Exception("<spriteRenderer> not assigned"));
 
@@ -137,7 +134,7 @@ public class Enemy : MonoBehaviour
         {
             if (m_health - 1 <= 0) 
             {
-                m_audioSource.PlayOneShot(deathSound);
+                AudioAfterDestroy.PlayAudio(deathSound, transform.position);
                 Destroy(this.gameObject);
                 
             }

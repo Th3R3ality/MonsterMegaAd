@@ -159,7 +159,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6453180263759153034}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_stateMachine: {fileID: 0}
   m_damage: 1
-  m_health: 25
+  m_health: 75
   m_speed: 0.5
   m_rigidbody: {fileID: 5602527335859917236}
   m_animator: {fileID: 631505061899671460}
@@ -390,4 +390,4 @@ MonoBehaviour:
   m_healthIndicators: []
   m_healthIndicatorPrefab: {fileID: 6574878631916475867, guid: f8e9ab188083b984cbf2ed49c064f59f, type: 3}
   m_healthIndicatorContainer: {fileID: 0}
-  m_maxIndicatorsPerRow: 10
+  m_maxIndicatorsPerRow: 20

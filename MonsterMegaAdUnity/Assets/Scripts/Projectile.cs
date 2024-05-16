@@ -6,14 +6,18 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public AudioSource player;
-    public AudioClip ground, enemy;
+    public AudioClip shot, ground, enemy;
 
     private void Awake()
     {
-        player = gameObject.AddComponent<AudioSource>();
+        shot = (AudioClip)Resources.Load("Audio/shot");
         ground = (AudioClip)Resources.Load("Audio/ground");
         enemy = (AudioClip)Resources.Load("Audio/enemy");
+    }
+    private void Start()
+    {
+
+        AudioAfterDestroy.PlayAudio(shot, transform.position);
     }
 
     private void OnDrawGizmosSelected()
@@ -29,14 +33,14 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
-            player.PlayOneShot(enemy);
+            AudioAfterDestroy.PlayAudio(enemy, transform.position);
             Destroy(this.gameObject);
         }
         
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Kill Floor"))
         {
-            player.PlayOneShot(ground);
+            AudioAfterDestroy.PlayAudio(ground, transform.position);
             Destroy(this.gameObject);
         }
     }
