@@ -429,13 +429,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stateMachine: {fileID: 0}
-  m_damage: 50
-  m_health: 350
+  m_damage: 1
+  m_health: 20
   m_speed: 0.5
   m_rigidbody: {fileID: 0}
   m_animator: {fileID: 631505061899671460}
   m_collider: {fileID: 0}
   srs: []
+  m_audioSource: {fileID: 0}
   m_stateChangeDelay: 0
   m_playerDetectionRadius: 0
   m_pathDistance: 0

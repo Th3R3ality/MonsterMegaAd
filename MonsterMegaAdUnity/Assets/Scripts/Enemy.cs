@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour
     public Animator m_animator;
     public BoxCollider2D m_collider;
     public SpriteRenderer[] srs;
+    public AudioSource m_audioSource;
+    public SpriteRenderer m_spriteRenderer;
     [Header("Enemy Settings")]
     [Range(0.0f, 10.0f)] public float m_stateChangeDelay;
     [Range(0.0f, 10.0f)] public float m_playerDetectionRadius;
@@ -29,7 +32,7 @@ public class Enemy : MonoBehaviour
     [Header("StateMachine Settings")]
     public string m_currentState;
     public bool TESTING;
-
+    private AudioClip deathSound;
     private void Awake()
     {
         if (Instance != this) Instance = this;
@@ -37,6 +40,8 @@ public class Enemy : MonoBehaviour
         if (!m_rigidbody) m_rigidbody = this.gameObject.AddComponent<Rigidbody2D>();
         if (!m_animator) m_animator = this.gameObject.GetComponent<Animator>();
         if (!m_collider) m_collider = this.gameObject.AddComponent<BoxCollider2D>();
+        if (!m_audioSource) m_audioSource = this.gameObject.AddComponent<AudioSource>();
+        if (!m_spriteRenderer) m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         if (!m_rigidbody || !m_animator || !m_stateMachine) Debug.LogError("42D ENEMY - something broke during setup (｡◕‿◕｡)" + this.gameObject);
         m_stateMachine.m_smoothTime = m_stateChangeDelay;
         m_stateMachine.m_owner = this.gameObject;
@@ -46,7 +51,8 @@ public class Enemy : MonoBehaviour
         m_stateMachine.m_attackRange= m_attackRange;
         m_stateMachine.m_attackBoxSize = m_attackBoxRange;
         m_stateMachine.m_attackBoxSize = m_attackBoxRange;
-        srs = GetComponentsInChildren<SpriteRenderer>();
+        deathSound = (AudioClip)Resources.Load("Audio/enemy_death");
+        
     }
 
     void Start()
@@ -58,6 +64,7 @@ public class Enemy : MonoBehaviour
     {
         UpdateSpriteVisibility();
     }
+
 
     private void OnDrawGizmosSelected()
     {
@@ -113,13 +120,12 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject) print("collided");
+        //if (collision.gameObject) print("collided");
         if(collision.gameObject.CompareTag("Projectile"))
         {
-            if (m_health - 20 <= 0) Destroy(this.gameObject);
-            else
+            if (m_health - 1 <= 0) Destroy(this.gameObject); m_audioSource.PlayOneShot(deathSound);
             {
-                m_health -= 20;
+                m_health -= 1;
                 m_stateMachine.ChangeState(new ChaseState(m_stateMachine.m_target,true));
             }
             

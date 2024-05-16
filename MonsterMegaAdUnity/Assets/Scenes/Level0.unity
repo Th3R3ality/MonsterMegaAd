@@ -10521,7 +10521,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 818373f6a0237194f9198b4351d35a6b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -14306,6 +14306,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3685593090344629476, guid: 4c306e12749b04d4598034f111d57389, type: 3}
+      propertyPath: m_animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7209452083150580455, guid: 4c306e12749b04d4598034f111d57389, type: 3}
       propertyPath: m_LocalPosition.x
       value: 245.43338
@@ -14407,8 +14411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stateMachine: {fileID: 0}
-  m_damage: 33
-  m_health: 350
+  m_damage: 0
+  m_health: 0
   m_speed: 0.5
   m_rigidbody: {fileID: 2111048500}
   m_animator: {fileID: 2111048502}
