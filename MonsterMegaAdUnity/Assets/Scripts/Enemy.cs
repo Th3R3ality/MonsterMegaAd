@@ -53,10 +53,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying)
         {
@@ -105,6 +105,23 @@ public class Enemy : MonoBehaviour
             // Add Gizmos for attack range
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(m_stateMachine.m_owner.transform.position, m_attackRange);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject) print("collided");
+        if(collision.gameObject.CompareTag("Projectile"))
+        {
+            Destroy(collision.gameObject);
+            if (m_health - 20 <= 0) Destroy(this.gameObject);
+            else
+            {
+                m_health -= 20;
+                m_stateMachine.ChangeState(new ChaseState(m_stateMachine.m_target,true));
+            }
+            
+            
         }
     }
 

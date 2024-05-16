@@ -62,8 +62,9 @@ public class StateMachine : MonoBehaviour
             }
         }
 
-        if (m_currentState != null && !isChangingState)
+        if (m_currentState != null && !isChangingState && m_owner)
         {
+            
             m_currentState.Execute(m_owner);
         }
     }
@@ -97,6 +98,7 @@ public class IdleState : IState
         m_initialPosition = owner.transform.position;
         m_targetPosition = m_initialPosition + new Vector3(owner.GetComponent<Enemy>().m_pathDistance, 0, 0);
         m_target = owner.GetComponent<StateMachine>().m_target;
+        if (!m_target) m_target = GameObject.FindWithTag("Player");
         movingToInitialPosition = false;
     }
 
@@ -113,9 +115,9 @@ public class IdleState : IState
         float radius = owner.GetComponent<Enemy>().m_playerDetectionRadius;
 
 
-        if (Vector2.Distance(owner.gameObject.transform.position, m_target.transform.position) >= radius)
+        if (Vector2.Distance(owner.gameObject.transform.position, m_target.transform.position) <= radius)
         {
-            owner.GetComponent<StateMachine>().ChangeState(new ChaseState(m_target));
+            owner.GetComponent<StateMachine>().ChangeState(new ChaseState(m_target, false));
             return;
         }
 
@@ -140,9 +142,14 @@ public class ChaseState : IState
 {
     GameObject m_target;
     Animator m_animator;
-    public ChaseState(GameObject tar)
+    bool chaseNoMatterWhat;
+    Rigidbody2D rigidbody;
+    StateMachine stateMachine;
+    float radius, speed, range;
+    public ChaseState(GameObject tar, bool flag)
     {
         m_target = tar;
+        chaseNoMatterWhat = flag;
     }
     
   
@@ -151,7 +158,13 @@ public class ChaseState : IState
     {
         m_animator = owner.GetComponent<Animator>();
         if (!m_animator) Debug.LogError("No Animator Found on gameObject" + owner.name);
-
+        rigidbody = owner.GetComponent<Rigidbody2D>();
+        speed = owner.GetComponent<Enemy>().m_speed;
+        radius = owner.GetComponent<Enemy>().m_maxChaseDistance;
+        range = owner.GetComponent<Enemy>().m_attackRange;
+        stateMachine = owner.GetComponent<StateMachine>();
+        m_target = stateMachine.m_target;
+        if (!m_target) m_target = GameObject.FindWithTag("Player");
 
 
     }
@@ -170,34 +183,27 @@ public class ChaseState : IState
 
     void Move(GameObject owner)
     {
-        Rigidbody2D rigidbody = owner.GetComponent<Rigidbody2D>();
-        float speed = owner.GetComponent<Enemy>().m_speed;
-        StateMachine stateMachine = owner.GetComponent<StateMachine>();
 
         if (!rigidbody)
+        {
             Debug.LogError("42D ENEMY - No rigidbody" + m_target.name);
+        }
         else
         {
             if (stateMachine.testing) Debug.Log("42D ENEMY - Running on Chase");
             float distanceToTarget = Vector2.Distance(owner.transform.position, m_target.transform.position);
-            Debug.Log("Distance to Target: " + distanceToTarget);
-
-            if (distanceToTarget >= stateMachine.m_maxChaseDistance)
-            {
-                Debug.Log("Switching to IdleState due to distance.");
-                stateMachine.ChangeState(new IdleState());
-            }
-            else if (distanceToTarget <= stateMachine.m_attackRange)
-            {
-                Debug.Log("Switching to AttackState due to distance.");
-                stateMachine.ChangeState(new AttackState(m_target));
-            }
+            if (distanceToTarget >= radius && !chaseNoMatterWhat) stateMachine.ChangeState(new IdleState());
+            if (distanceToTarget <= range) stateMachine.ChangeState(new AttackState(m_target));
             else
             {
-                rigidbody.velocity = (m_target.transform.position - owner.transform.position).normalized * Time.deltaTime * speed;
+                Vector2 direction = (m_target.transform.position - owner.transform.position).normalized;
+                rigidbody.velocity = direction * speed;
             }
+
+
         }
     }
+
 }
 
 public class AttackState : IState
@@ -236,7 +242,7 @@ public class AttackState : IState
         float range = owner.GetComponent<Enemy>().m_attackRange;
         float boxSize = owner.GetComponent<Enemy>().m_attackBoxRange;
         float damage = owner.GetComponent<Enemy>().m_damage;
-        if (Vector2.Distance(owner.transform.position, target.transform.position) >= (stateMachine.m_attackRange)) stateMachine.ChangeState(new ChaseState(target));
+        if (Vector2.Distance(owner.transform.position, target.transform.position) >= (stateMachine.m_attackRange)) stateMachine.ChangeState(new ChaseState(target, false));
         Collider2D hitCollider = Physics2D.OverlapBox(owner.transform.position, new Vector2(boxSize, boxSize), 0, LayerMask.GetMask("Entity"));
         if (hitCollider && hitCollider.CompareTag("Player"))
         {

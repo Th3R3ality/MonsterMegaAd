@@ -6,3 +6,5 @@ public class RangedShot : MonoBehaviour
 {
     public Projectile[] m_projectiles;
 }
+
+
