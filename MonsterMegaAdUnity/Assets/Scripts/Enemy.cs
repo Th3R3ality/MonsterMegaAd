@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        UpdateSpriteVisibility();
+        //UpdateSpriteVisibility();
     }
 
 
