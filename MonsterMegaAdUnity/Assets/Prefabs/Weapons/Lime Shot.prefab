@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5744068337667768408}
   - component: {fileID: 3171069883321396709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lime Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 8876296169133672285}
   - component: {fileID: 5260585305724077593}
   - component: {fileID: 3923265594517434809}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8876296169133672285}
+  player: {fileID: 0}
+  ground: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!212 &815717723807671674
 SpriteRenderer:
   m_ObjectHideFlags: 0

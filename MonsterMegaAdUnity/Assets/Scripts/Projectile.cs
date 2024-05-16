@@ -32,11 +32,11 @@ public class Projectile : MonoBehaviour
             player.PlayOneShot(enemy);
             Destroy(this.gameObject);
         }
-        else
+        
+        if (collision.gameObject.layer == 1 << LayerMask.NameToLayer("Ground"))
         {
             player.PlayOneShot(ground);
             Destroy(this.gameObject);
         }
     }
-
 }

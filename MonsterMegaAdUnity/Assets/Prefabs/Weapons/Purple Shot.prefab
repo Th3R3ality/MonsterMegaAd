@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2939522014160225644}
   - component: {fileID: 4767546978665150800}
   - component: {fileID: 4852221914014072444}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot 3
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2939522014160225644}
+  player: {fileID: 0}
+  ground: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!212 &4625961057344654113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -291,7 +294,7 @@ GameObject:
   - component: {fileID: 6615832306029450324}
   - component: {fileID: 8344598329679193579}
   - component: {fileID: 8904015476105892660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot 2
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -326,6 +329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6615832306029450324}
+  player: {fileID: 0}
+  ground: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!212 &7696898134158119793
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -564,7 +570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5744068337667768408}
   - component: {fileID: 3171069883321396709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Purple Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +625,7 @@ GameObject:
   - component: {fileID: 8876296169133672285}
   - component: {fileID: 5260585305724077593}
   - component: {fileID: 3923265594517434809}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot 1
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -654,6 +660,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8876296169133672285}
+  player: {fileID: 0}
+  ground: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!212 &815717723807671674
 SpriteRenderer:
   m_ObjectHideFlags: 0
