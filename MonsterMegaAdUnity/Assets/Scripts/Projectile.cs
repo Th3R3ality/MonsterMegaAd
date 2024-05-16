@@ -27,13 +27,14 @@ public class Projectile : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             player.PlayOneShot(enemy);
             Destroy(this.gameObject);
         }
         
-        if (collision.gameObject.layer == 1 << LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") ||
+            collision.gameObject.layer == LayerMask.NameToLayer("Kill Floor"))
         {
             player.PlayOneShot(ground);
             Destroy(this.gameObject);

@@ -239,14 +239,15 @@ public class AttackState : IState
     {
         if (owner.GetComponent<StateMachine>().testing) Debug.Log("42D ENEMY - Running on Attack");
         StateMachine stateMachine = owner.GetComponent<StateMachine>();
-        float range = owner.GetComponent<Enemy>().m_attackRange;
         float boxSize = owner.GetComponent<Enemy>().m_attackBoxRange;
         int damage = owner.GetComponent<Enemy>().m_damage;
         if (Vector2.Distance(owner.transform.position, target.transform.position) >= (stateMachine.m_attackRange)) stateMachine.ChangeState(new ChaseState(target, false));
         Collider2D hitCollider = Physics2D.OverlapBox(owner.transform.position, new Vector2(boxSize, boxSize), 0, LayerMask.GetMask("Entity"));
         if (hitCollider && hitCollider.CompareTag("Player"))
         {
-            hitCollider.GetComponent<Player>().m_health -= damage;
+            Player player = hitCollider.GetComponent<Player>();
+            player.m_health -= damage;
+            player.UpdateHealthIndicator();
             owner.GetComponent<StateMachine>().ChangeState(new IdleState());
             Debug.Log("42D ENEMY - Player Hit!");
         }

@@ -22,12 +22,7 @@ public class Enemy : MonoBehaviour
     public BoxCollider2D m_collider;
     public AudioSource m_audioSource;
     public SpriteRenderer m_spriteRenderer;
-
-    [Header("Health Indicators")]
-    public List<SpriteRenderer> m_healthIndicators;
-    public GameObject m_healthIndicatorPrefab;
-    public Transform m_healthIndicatorContainer;
-    public float m_maxIndicatorsPerRow = 10.0f;
+    public HealthIndicator m_healthIndicator;
 
     [Header("Enemy Settings")]
     [Range(0.0f, 10.0f)] public float m_stateChangeDelay;
@@ -46,10 +41,7 @@ public class Enemy : MonoBehaviour
     {
         m_stateMachine = this.gameObject.AddComponent<StateMachine>();
 
-        if (!m_healthIndicatorContainer)
-            Debug.LogException(new Exception("<healthIndicatorContain> not assigned"));
-        if (!m_healthIndicatorPrefab)
-            Debug.LogException(new Exception("<healthIndicatorPrefab> not assigned"));
+
         if (!m_stateMachine)
             Debug.LogException(new Exception("<stateMachine> not assigned"));
         if (!m_rigidbody)
@@ -58,8 +50,8 @@ public class Enemy : MonoBehaviour
             Debug.LogException(new Exception("<animator> not assigned"));
         if (!m_collider)
             Debug.LogException(new Exception("<collider> not assigned"));
-        //if (!m_audioSource)
-        //    Debug.LogException(new Exception("<audioSource> not assigned"));
+        if (!m_audioSource)
+            Debug.LogException(new Exception("<audioSource> not assigned"));
         if (!m_spriteRenderer)
             Debug.LogException(new Exception("<spriteRenderer> not assigned"));
 
@@ -83,7 +75,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        UpdateHealthIndicators();
+        m_healthIndicator.UpdateIndicators(m_health, m_spriteRenderer.color);
     }
 
 
@@ -141,101 +133,19 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject) print("collided");
-        if(collision.gameObject.CompareTag("Projectile"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("SolidProjectile"))
         {
-            if (m_health - 1 <= 0) Destroy(this.gameObject); m_audioSource.PlayOneShot(deathSound);
+            if (m_health - 1 <= 0) 
             {
-                m_health -= 1;
-                m_stateMachine.ChangeState(new ChaseState(m_stateMachine.m_target,true));
+                m_audioSource.PlayOneShot(deathSound);
+                Destroy(this.gameObject);
+                
             }
-            
-            
+
+            m_health -= 1;
+            m_stateMachine.ChangeState(new ChaseState(m_stateMachine.m_target,true));
         }
     }
 
-    void UpdateHealthIndicators()
-    {
-        if (m_healthIndicators.Count < 0) return;
-
-        while (m_healthIndicators.Count != m_health)
-        {
-            if (m_healthIndicators.Count > m_health)
-            { // destroy an indicator
-                var indicator = m_healthIndicators[m_healthIndicators.Count - 1];
-                m_healthIndicators.Remove(indicator);
-                Destroy(indicator.gameObject);
-            }
-            else
-            { // add an indicator
-                GameObject indicatorObject = Instantiate(m_healthIndicatorPrefab, m_healthIndicatorContainer);
-
-                var spriteRenderer = indicatorObject.GetComponent<SpriteRenderer>();
-                if (spriteRenderer == null)
-                    Debug.LogException(new Exception("indicator prefab does not contain <SpriteRenderer>"));
-
-                spriteRenderer.color = m_spriteRenderer.color;
-
-                m_healthIndicators.Add(spriteRenderer);
-            }
-
-            // align indicators (Evil dark shadow magic mathematics)
-
-            float rowCount = m_maxIndicatorsPerRow * Mathf.Floor(m_healthIndicators.Count / m_maxIndicatorsPerRow);
-
-            for (float i = 0.0f; i < m_healthIndicators.Count; i += 1.0f)
-            {
-                Vector3 pos = Vector3.zero;
-
-                pos.y = 0.1f * Mathf.Floor(i / m_maxIndicatorsPerRow);
-
-                float evenCountAlignment = 0;
-                if (m_maxIndicatorsPerRow % 2 == 0)
-                {
-                    if (i >= rowCount)
-                    {
-                        evenCountAlignment = m_healthIndicators.Count % 2 * 0.02f;
-                    }
-                    else
-                    {
-                        evenCountAlignment = 0.02f;
-                    }
-                }
-                else
-                {
-                    if (i >= rowCount)
-                    {
-                        evenCountAlignment = (1 - (m_healthIndicators.Count % 2)) * 0.02f;
-                    }
-                }
-
-                float centerRowAlignment = 0f;
-                if (m_maxIndicatorsPerRow % 2 == 0)
-                {
-                    if (i < rowCount)
-                    {
-                        centerRowAlignment = -(m_maxIndicatorsPerRow / 2 * 0.04f);
-                    }
-                    else
-                    {
-                        centerRowAlignment = -(((m_healthIndicators.Count % m_maxIndicatorsPerRow) - (1 - (m_healthIndicators.Count % 2))) / 2 * 0.04f);
-                    }
-                }
-                else
-                {
-                    if (i < rowCount)
-                    {
-                        centerRowAlignment = -(m_maxIndicatorsPerRow / 2 * 0.04f) + 0.02f;
-                    }
-                    else
-                    {
-                        centerRowAlignment = -(((m_healthIndicators.Count % m_maxIndicatorsPerRow) - ((m_healthIndicators.Count % 2))) / 2 * 0.04f);
-                    }
-                }
-
-                pos.x = i % m_maxIndicatorsPerRow * 0.04f + centerRowAlignment + evenCountAlignment;
-                m_healthIndicators[(int)i].transform.localPosition = pos;
-            }
-        }
-    }
+    
 }
